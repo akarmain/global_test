@@ -1,0 +1,103 @@
+body {
+    background: #000;
+    color: #0f0; /* Ярко-зелёный текст, напоминающий старый монохромный дисплей */
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header, footer {
+    padding: 20px;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #ff0000; /* Красный заголовок для контраста */
+    margin: 50px 0 20px;
+    text-shadow: 0 0 5px #f00; /* Лёгкое свечение, имитирующее старый монитор */
+}
+
+main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: left; /* В старых терминалах текст был выровнен по левому краю */
+}
+
+/* Стили для поля ввода */
+#user_answer_input {
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1rem;
+    padding: 5px;
+    width: 80%;
+    max-width: 400px;
+    box-sizing: border-box;
+    outline: none;
+    caret-color: #0f0; /* Зелёный курсор */
+}
+
+/* Мигающий курсор можно имитировать анимацией placeholder-а, но проще будет сделать псевдо-элемент */
+#user_answer_input::placeholder {
+    color: #0f0;
+    opacity: 0.5;
+}
+
+/* Стили для кнопки проверки ответа */
+#submit_answer_button {
+    background: #000;
+    color: #0f0;
+    border: 1px solid #0f0;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1rem;
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+#submit_answer_button:hover {
+    background: #0f0;
+    color: #000;
+    text-shadow: 0 0 2px #0f0;
+}
+
+footer p {
+    color: #888;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Дополнительный эффект для сообщения */
+#message {
+    color: #f00;
+    margin-top: 20px;
+    white-space: pre-wrap;
+    font-family: "Courier New", Courier, monospace;
+}
+
+/* Можно добавить лёгкую анимацию, имитирующую мерцание */
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Дополнительный стиль для confetti-container, чтобы не выделяться сильно */
+#confetti-container {
+    /* Остальные стили уже определены inline */
+    pointer-events: none;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.fisheye-container {
+    filter: url(#fisheyeFilter);
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Приложение{% endblock %}</title>
+    <link rel="stylesheet" href="/static/confetti.css">
+    <link rel="stylesheet" href="/static/stile.css">
+    <script src="/static/confetti.js" defer></script>
+
+</head>
+<body>
+    <main {% block main_attrs %}{% endblock %}>
+        {% block content %}{% endblock %}
+    </main>
+    {% block scripts %}
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const button = document.getElementById('submit_answer_button');
+        const input = document.getElementById('user_answer_input');
+        const message = document.getElementById('message');
+
+        // Получаем task_id из data-атрибута main
+        const mainElement = document.querySelector('main');
+        const taskId = mainElement ? mainElement.getAttribute('data-task-id') : null;
+
+        if(button && taskId){
+            button.addEventListener('click', async (e) => {
+                e.preventDefault();
+
+                const userAnswer = input.value.trim();
+                if (!userAnswer) {
+                    message.textContent = "Введите ответ!";
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('user_answer', userAnswer);
+
+                const response = await fetch(`/check_answer/${taskId}`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if(data.status === 'correct') {
+                    message.style.color = 'green';
+                    message.textContent = "Правильно |)";
+                    startConfetti();
+                    setTimeout(() => {
+                        window.location.href = "/";
+                    }, 2500);
+
+                } else if (data.status === 'incorrect') {
+                    message.style.color = 'red';
+                    message.textContent = "Неправильно |(";
+                } else if (data.status === 'solved') {
+                    message.style.color = 'green';
+                    message.textContent = "Задание уже выполнено.";
+                } else {
+                    message.style.color = 'red';
+                    message.textContent = data.message || "Произошла ошибка.";
+                }
+            });
+        }
+    });
+    </script>
+    {% endblock %}
+</body>
+</html>

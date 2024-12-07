@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Все задания решены!</title>
+</head>
+<style>
+    body {
+    background: #000;
+    color: #0f0;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.finished-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: flicker 3s infinite;
+}
+
+.finished-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #0f0;
+}
+
+/* Контейнер для котика */
+.cat-typing {
+    width: 200px;
+    height: 200px;
+    background: url("/static/cat.gif") no-repeat center center;
+    background-size: contain;
+    animation: bounce 2s infinite alternate ease-in-out;
+}
+
+/* Анимация "подпрыгивания" котика */
+@keyframes bounce {
+    0% {
+        transform: translateY(0px) scale(1);
+    }
+    100% {
+        transform: translateY(-10px) scale(1.05);
+    }
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+</style>
+<body>
+    <div class="finished-container">
+        <h1>Все задания решены!</h1>
+        <div class="cat-typing"></div>
+    </div>
+</body>
+</html>
